@@ -10,6 +10,3 @@ komiwojażer
 
 magazyny-trasy-zamówienia - optymalizacja min kosztu wysyłki
 + zamawianie w magazynach
-
-
-https://scipbook.readthedocs.io/en/latest/intro.html - LINK DO TUTORIALA
