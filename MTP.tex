@@ -1,12 +1,150 @@
-\documentclass{article}
+\documentclass[a4paper]{article}
 
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{graphicx}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
 
 \begin{document}
-\title{Problem transportowy wielu produktów}
+\title{ \textbf{Sprawozdanie} \protect\\ Problem transportowy wielu produktów}
 \author{Bartosz Wlazło, Przemysław Jekiel}
 \maketitle
+\pagenumbering{arabic}
 
+\newpage 
+
+
+\section{Wstęp}
+
+\subsection{Problematyka}
+
+Celem niniejszego badania było rozwiązanie problemu transportowego wielu produktów. 
+
+\subsection{Przyjęty przypadek użycia}
+
+Osoba X prowadzi sieć sklepów spożywczych. Największe koszty, które ponosi firma są związane z transportem produków z magazynów do sklepów. W celu obniżenia ich udała się ona do firmy OPTTech w celu opracowania narzędzia do planowania tras i ilości zabieranych produktów.
+
+\section{Założenia projektowe}
+\subsection{Uproszczenia}
+W celu szybszej pracy kody próbka danych został ograniczona do:
+\begin{itemize}
+	\item 5 sklepów 
+	\item 3 magazynów
+	\item 4 typów produktów
+	\item nieskończonej liczby środków transportu 
+	\item wartości ograniczeń są wyrażone w liczbach całkowitych 
+\end{itemize}
+
+Zostało także przyjęte uproszczenie iż każdy produkt jest magazowany w tej samej liczbie.
+
+\subsection{Definicja zmiennych}
+\subsection{Szukane}
+X(i,j,k) - ilość wysłanych sztuk produktu \textit{k} rodzaju do \textit{i} klienta z \textit{j} magazynu.
+\subsection{Model matematyczny}
+
+\newpage 
+
+\section{Założenia projektowe}
+\subsection{Dane ograniczeń}
+\subsubsection{\textit{Pojemności magazynów}}
+\begin{center}
+	\begin{tabular}{ |c|c| } 
+		\hline
+		 Magazyn & Pojemność\\
+		\hline
+		Magazyn 1 & 3000  \\ 
+		\hline
+		Magazyn 2 & 3000  \\ 
+		\hline
+		Magazyn 3 & 3000  \\ 
+		\hline
+	\end{tabular}
+\end{center}
+
+\subsubsection{\textit{Dostępność produktów w danych magazynach}}
+\begin{center}
+	\begin{tabular}{ |c|c| } 
+		\hline
+		Magazyn & Produkt \\
+		\hline
+		Magazyn 1 & 2, 4  \\ 
+		\hline
+		Magazyn 2 & 1, 2, 3  \\ 
+		\hline
+		Magazyn 3 & 2, 3, 4  \\ 
+		\hline
+	\end{tabular}
+\end{center}
+
+\subsubsection{\textit{Zapotrzebowanie sklepów na dany produkt}}
+\begin{center}
+	\begin{tabular}{ |c|c|c | } 
+		\hline
+		Magazyn & Produkt & Zapotrzebowanie\\
+		\hline
+		Sklep 1 & 1 & \\ 
+		\hline
+		Sklep 1 & 2 & \\ 
+		\hline
+		Sklep 1 & 3 & \\ 
+		\hline
+		Sklep 1 & 4 & \\ 
+		\hline
+		Sklep 2 & 1 & \\ 
+		\hline
+		Sklep 2 & 2 & \\ 
+		\hline
+		Sklep 2 & 3 & \\ 
+		\hline
+		Sklep 2 & 4 & \\ 
+		\hline
+		Sklep 3 & 1 & \\ 
+		\hline
+		Sklep 3 & 2 & \\ 
+		\hline
+		Sklep 3 & 3 & \\ 
+		\hline
+		Sklep 3 & 4 & \\ 
+		\hline
+		Sklep 4 & 1 & \\ 
+		\hline
+		Sklep 4 & 2 & \\ 
+		\hline
+		Sklep 4 & 3 & \\ 
+		\hline
+		Sklep 4 & 4 & \\ 
+		\hline
+	\end{tabular}
+\end{center}
+
+\subsection{Dane}
+
+\subsubsection{\textit{Wagi produktów}}
+\begin{center}
+	\begin{tabular}{ |c|c| } 
+		\hline
+		Produkt & Waga \\
+		\hline
+		Produkt 1 & 5  \\ 
+		\hline
+		Produkt 2 & 2  \\ 
+		\hline
+		Produkt 3 & 3  \\ 
+		\hline
+		Produkt 4 & 4  \\ 
+		\hline
+	\end{tabular}
+\end{center}
+
+\newpage
+
+
+\section{Wynik}
+
+
+\newpage 
+
+\section{Kod}
+\texttt{List.class}
 \end{document}
