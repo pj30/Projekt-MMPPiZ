@@ -1,4 +1,5 @@
 from pyscipopt import Model, quicksum, multidict
+import pandas as pd
 
 ################################
 # I - sklep , J - magazyn , K - typ produktu
@@ -18,38 +19,49 @@ def mctransp(I, J, K, c, d, M):
      return model
 
 ################################
+def load_data(file_name, sheet_name):
+
+    data = pd.read_excel(file_name, sheet_name)
+    dict = {}
+
+    if sheet_name in ['DostepnoscProduktowWMagazynach']:
+        for index, row in data.iterrows():
+            dict[str(row[0])] = str(row[1]).split(", ")
+    elif sheet_name in ['WagaProduktu', 'PojemnoscMagazynu']:
+        for index, row in data.iterrows():
+            dict[str(row[0])] = int(row[1])
+    elif sheet_name in ['Zapotrzebowanie', 'Koszt']:
+        for index, row in data.iterrows():
+            dict[str(row[0]), str(row[1])] = int(row[2])
+    else:
+        print('Bledna nazwa arkusza!')
+
+    return dict
+
+file_name = 'Database.xlsx'
+
 # OGRANICZENIA
 
 # Ilosc sztuk danego produktow K (wszystkich) w J magazynie
-J,M = multidict({1:3000, 2:3000, 3:3000})
-
+#J,M = multidict({'Magazyn 1': 3000, 'Magazyn 2': 3000, 'Magazyn 3':3000})
+J,M = multidict(load_data(file_name, 'PojemnoscMagazynu'))
 # Jakie produkty sa dostepne w J magazynie
-produkt = {1:[2,4], 2:[1,2,3], 3:[2,3,4]}
+produkt = load_data(file_name, 'DostepnoscProduktowWMagazynach')
 
 # Zapotrzebowanie J klienta na K produktu
-d = {(1,1):80,   (1,2):85,   (1,3):300,  (1,4):6,
-     (2,1):270,  (2,2):160,  (2,3):400,  (2,4):7,
-     (3,1):250,  (3,2):130,  (3,3):350,  (3,4):4,
-     (4,1):160,  (4,2):60,   (4,3):200,  (4,4):3,
-     (5,1):180,  (5,2):40,   (5,3):150,  (5,4):5
-     }
+d = load_data(file_name, 'Zapotrzebowanie')
 
 # Lista sklepow
 I = set([i for (i,k) in d])
 
 # Lista produktow
 K = set([k for (i,k) in d])
-
+print(produkt)
 # Wagi produktow
-waga = {1:5, 2:2, 3:3, 4:4}
+waga = load_data(file_name, 'WagaProduktu')
 
 # Koszt transportu
-koszt = {(1,1):4,  (1,2):6, (1,3):9,
-        (2,1):5,  (2,2):4, (2,3):7,
-        (3,1):6,  (3,2):3, (3,3):4,
-        (4,1):8,  (4,2):5, (4,3):3,
-        (5,1):10, (5,2):8, (5,3):4
-        }
+koszt = load_data(file_name, 'Koszt')
 
 # Koszt dotarcia z J magazynu do M sklepu
 c = {}
@@ -69,4 +81,4 @@ x = model.data
 print("Ogolny koszt transportu wynosi:", model.getObjVal())
 for i,j,k in x:
     if model.getVal(x[i,j,k]) > EPS:
-        print("Wysylka %10g sztuk %3d z magazynu %3d do klienta %3d" % (model.getVal(x[i,j,k]), k, j, i))
+        print("Wysylka %10g sztuk %3s z magazynu %3s do klienta %3s" % (model.getVal(x[i,j,k]), k, j, i))
