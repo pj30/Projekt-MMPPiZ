@@ -1,11 +1,13 @@
 html, body {
   margin: 0;
   height: 100%;
-  /* fallback for old browsers */
   background: -webkit-linear-gradient(to top, #ffcc33, #ffb347);
-  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to top, #ffcc33, #ffb347);
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  /*
+  background-image: url('bg.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;*/
 }
 
 .container-fluid {
@@ -29,14 +31,10 @@ nav {
   margin-bottom: 40px;
 }
 
-.bg-light{
-  color:#fff !important;
-}
-
 .menu-homepage {
   width: 100%;
   min-height: 60vh;
-  background-color: #fff;
+  background-color: #f8f9fa;
   padding: 20px;
   color: orange !important;
   font-weight: 500;
@@ -44,16 +42,20 @@ nav {
   text-align: center;
 }
 
-.content{
+.content {
   width: 100%;
   min-height: 60vh;
-  background-color: #fff;
+  background-color: #f8f9fa;
   padding: 20px;
   color: orange !important;
   font-weight: 500;
 }
 
-.cool{
-  height:50vh;
+.cool {
+  height: 50vh;
   margin-bottom: 20px;
+}
+
+.nav-link:hover{
+  color: orange!important;
 }
