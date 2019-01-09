@@ -1,0 +1,59 @@
+html, body {
+  margin: 0;
+  height: 100%;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #ffcc33, #ffb347);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #ffcc33, #ffb347);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.container-fluid {
+  padding: 25px 250px 0px 250px !important;
+  border-radius: 20px;
+}
+
+@media only screen and (max-width: 767px) {
+  .container-fluid {
+    padding: 25px 50px 0px 50px !important;
+  }
+}
+
+.navbar-brand {
+  color: orange !important;
+  font-weight: 500;
+  font-size: 40px;
+}
+
+nav {
+  margin-bottom: 40px;
+}
+
+.bg-light{
+  color:#fff !important;
+}
+
+.menu-homepage {
+  width: 100%;
+  min-height: 60vh;
+  background-color: #fff;
+  padding: 20px;
+  color: orange !important;
+  font-weight: 500;
+  font-size: 30px;
+  text-align: center;
+}
+
+.content{
+  width: 100%;
+  min-height: 60vh;
+  background-color: #fff;
+  padding: 20px;
+  color: orange !important;
+  font-weight: 500;
+}
+
+.cool{
+  height:50vh;
+  margin-bottom: 20px;
+}
