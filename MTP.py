@@ -48,6 +48,7 @@ def solve():
     J,M = multidict(load_data(file_name, 'PojemnoscMagazynu'))
     # Jakie produkty sa dostepne w J magazynie
     produkt = load_data(file_name, 'DostepnoscProduktowWMagazynach')
+    print(produkt)
 
     # Zapotrzebowanie J klienta na K produktu
     d = load_data(file_name, 'Zapotrzebowanie')
@@ -83,3 +84,9 @@ def solve():
     for i,j,k in x:
         if model.getVal(x[i,j,k]) > EPS:
             print("Wysylka %10g sztuk %3s z magazynu %3s do klienta %3s" % (model.getVal(x[i,j,k]), k, j, i))
+
+def getRawData(file_name, sheet_name):
+    dataFrame = pd.read_excel(file_name, sheet_name)
+    for columnName in list(dataFrame.columns.values):
+        dataFrame[columnName] = dataFrame[columnName].astype(str)
+    return dataFrame.values.tolist()
