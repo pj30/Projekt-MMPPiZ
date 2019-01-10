@@ -80,10 +80,14 @@ def solve():
 
     EPS = 1.e-6
     x = model.data
+    resultAsList = []
     print("Ogolny koszt transportu wynosi:", model.getObjVal())
     for i,j,k in x:
         if model.getVal(x[i,j,k]) > EPS:
             print("Wysylka %10g sztuk %3s z magazynu %3s do klienta %3s" % (model.getVal(x[i,j,k]), k, j, i))
+            resultAsList.append([i, j, k, model.getVal(x[i,j,k])])
+
+    return model.getObjVal(), resultAsList
 
 def getRawData(file_name, sheet_name):
     dataFrame = pd.read_excel(file_name, sheet_name)
