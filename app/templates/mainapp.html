@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+  <link rel="stylesheet" type="text/css" href="../static/styles/main.css">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/main.css') }}">
+  <title>MTP</title>
+</head>
+<!-- NAVBAR -->
+
+<body>
+  <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light rounded animated fadeInDown">
+      <a class="navbar-brand" href="#">MTP</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="https://github.com/pj30/Projekt-MMPPiZ">Github - project site<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/pj30">Przemysław Jekiel</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/BartoszWlazlo">Bartosz Wlazło</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/">Strona główna</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/mainapp">Przejdź do aplikacji</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="content rounded animated fadeInUp">
+      <div class="row rounded">
+        Całkowity koszt wynosi:  &nbsp {{resultobj}}
+        <br / />
+      </div>
+      <br / />
+      <div id="accordion">
+        <div class="card">
+          <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+              <button class="btn btn-secondary" data-toggle="collapse" data-target="#collapse7" aria-expanded="true" aria-controls="collapseOne">
+                Wynik
+              </button>
+            </h5>
+          </div>
+
+          <div id="collapse7" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body">
+              <table class="table table-bordered">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Sklep:</th>
+                    <th scope="col">Magazyn:</th>
+                    <th scope="col">Produkt:</th>
+                    <th scope="col">Ilość:</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for res_list in resultlist %}
+                  <tr>
+                    {% for res_element in res_list %}
+                    <th scope="col">{{ res_element }}</th>
+                    {% endfor %}
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+              <button class="btn btn-secondary" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Pojemność magazynu
+              </button>
+            </h5>
+          </div>
+
+          <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body">
+              <table class="table table-bordered">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Magazyn:</th>
+                    <th scope="col">Pojemność:</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for costs_list in PojemnoscMagazynu %}
+                  <tr>
+                    {% for costs_element in costs_list %}
+                    <th scope="col">{{ costs_element }}</th>
+                    {% endfor %}
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="headingTwo">
+            <h5 class="mb-0">
+              <button class="btn btn-secondary collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Dostepność produktów w magazynach
+              </button>
+            </h5>
+          </div>
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+            <div class="card-body">
+              <table class="table table-bordered">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Magazyn:</th>
+                    <th scope="col">Produkt:</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for dost_list in DostepnoscProduktowWMagazynach %}
+                  <tr>
+                    {% for dost_element in dost_list %}
+                    <th scope="col">{{ dost_element }}</th>
+                    {% endfor %}
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="headingThree">
+            <h5 class="mb-0">
+              <button class="btn btn-secondary collapsed" data-toggle="collapse" data-target="#collapse4" aria-expanded="false" aria-controls="collapseThree">
+                Zapotrzebowanie
+              </button>
+            </h5>
+          </div>
+          <div id="collapse4" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+            <div class="card-body">
+              <table class="table table-bordered">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Sklep:</th>
+                    <th scope="col">Produkt:</th>
+                    <th scope="col">Zapotrzebowanie:</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for zapo_list in Zapotrzebowanie %}
+                  <tr>
+                    {% for zapo_element in zapo_list %}
+                    <th scope="col">{{ zapo_element }}</th>
+                    {% endfor %}
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="headingThree">
+            <h5 class="mb-0">
+              <button class="btn btn-secondary collapsed" data-toggle="collapse" data-target="#collapse5" aria-expanded="false" aria-controls="collapseThree">
+                Waga produktów
+              </button>
+            </h5>
+          </div>
+          <div id="collapse5" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+            <div class="card-body">
+              <table class="table table-bordered">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Produkt:</th>
+                    <th scope="col">Waga:</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for waga_list in WagaProduktu %}
+                  <tr>
+                    {% for waga_element in waga_list %}
+                    <th scope="col">{{ waga_element }}</th>
+                    {% endfor %}
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="headingThree">
+            <h5 class="mb-0">
+              <button class="btn btn-secondary collapsed" data-toggle="collapse" data-target="#collapse6" aria-expanded="false" aria-controls="collapseThree">
+                Koszt przewozu
+              </button>
+            </h5>
+          </div>
+          <div id="collapse6" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+            <div class="card-body">
+              <table class="table table-bordered">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Sklep:</th>
+                    <th scope="col">Magazyn:</th>
+                    <th scope="col">Koszt:</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for koszt_list in Koszt %}
+                  <tr>
+                    {% for koszt_element in koszt_list %}
+                    <th scope="col">{{ koszt_element }}</th>
+                    {% endfor %}
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+
+</html>

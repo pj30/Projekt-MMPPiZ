@@ -1,9 +1,11 @@
 html, body {
   margin: 0;
   height: 100%;
+  background-color: #ffb347
+    /*
+  background-color: #ffb347
   background: -webkit-linear-gradient(to top, #ffcc33, #ffb347);
   background: linear-gradient(to top, #ffcc33, #ffb347);
-  /*
   background-image: url('bg.png');
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -42,20 +44,29 @@ nav {
   text-align: center;
 }
 
-.content {
-  width: 100%;
-  min-height: 60vh;
-  background-color: #f8f9fa;
-  padding: 20px;
-  color: orange !important;
-  font-weight: 500;
-}
-
 .cool {
   height: 50vh;
   margin-bottom: 20px;
 }
 
-.nav-link:hover{
-  color: orange!important;
+.nav-link:hover {
+  color: orange !important;
+}
+
+.content {
+  width: 100%;
+  min-height: 60vh;
+  padding: 20px;
+  color: #333 !important;
+  font-weight: 500;
+}
+
+body > div > div > div.row.rounded{
+  background-color: #f8f9fa;
+  padding: 20px;
+  text-align: center;
+}
+
+.card-header {
+  text-align: center;
 }

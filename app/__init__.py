@@ -1,14 +1,23 @@
 from flask import Flask,render_template
+from MTP import getRawData, solve, solve2
+
 app = Flask(__name__)
 
 @app.route("/")
 def index():
     return render_template('homepage.html')
 
-@app.route("/datacosts")
-def datacosts():
-    costs= [1,2,3,4]
-    return render_template('datacosts.html', costs=costs)
+@app.route("/mainapp")
+def mainapp():
+    file_name = 'Database.xlsx'
+    PojemnoscMagazynu = getRawData(file_name, sheet_name = 'PojemnoscMagazynu')
+    DostepnoscProduktowWMagazynach = getRawData(file_name, sheet_name = 'DostepnoscProduktowWMagazynach')
+    Zapotrzebowanie = getRawData(file_name, sheet_name = 'Zapotrzebowanie')
+    WagaProduktu = getRawData(file_name, sheet_name = 'WagaProduktu')
+    Koszt = getRawData(file_name, sheet_name = 'Koszt')
+    resultlist = solve()
+    resultobj = solve2()
+    return render_template('mainapp.html', PojemnoscMagazynu=PojemnoscMagazynu , DostepnoscProduktowWMagazynach=DostepnoscProduktowWMagazynach , Zapotrzebowanie = Zapotrzebowanie, WagaProduktu = WagaProduktu, Koszt = Koszt,  resultlist = resultlist , resultobj = resultobj)
 
 if __name__ == "__main__":
     app.run()
