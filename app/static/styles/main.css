@@ -1,7 +1,7 @@
 html, body {
   margin: 0;
   height: 100%;
-  background-color: #ffb347
+  background-color: #dadada;
     /*
   background-color: #ffb347
   background: -webkit-linear-gradient(to top, #ffcc33, #ffb347);
@@ -12,9 +12,25 @@ html, body {
   background-position: center;*/
 }
 
-.container-fluid {
-  padding: 25px 250px 0px 250px !important;
-  border-radius: 20px;
+/* SCROOLBAR */
+/* width */
+::-webkit-scrollbar {
+  width: 18px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background-color: #ffcc33;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: red;
 }
 
 @media only screen and (max-width: 767px) {
@@ -27,10 +43,6 @@ html, body {
   color: orange !important;
   font-weight: 500;
   font-size: 40px;
-}
-
-nav {
-  margin-bottom: 40px;
 }
 
 .menu-homepage {
@@ -47,6 +59,13 @@ nav {
 .cool {
   height: 50vh;
   margin-bottom: 20px;
+}
+
+nav{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 999;
 }
 
 .nav-link:hover {
@@ -69,4 +88,22 @@ body > div > div > div.row.rounded{
 
 .card-header {
   text-align: center;
+}
+
+#section0{
+  padding-left: 20%;
+  padding-right: 20%;
+}
+
+#section0{
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.card{
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  height: 70%;
+  overflow-y: auto;
 }

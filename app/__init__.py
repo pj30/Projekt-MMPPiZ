@@ -5,10 +5,6 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return render_template('homepage.html')
-
-@app.route("/mainapp")
-def mainapp():
     file_name = 'Database.xlsx'
     PojemnoscMagazynu = getRawData(file_name, sheet_name = 'PojemnoscMagazynu')
     DostepnoscProduktowWMagazynach = getRawData(file_name, sheet_name = 'DostepnoscProduktowWMagazynach')
@@ -17,7 +13,7 @@ def mainapp():
     Koszt = getRawData(file_name, sheet_name = 'Koszt')
     resultlist = solve()
     resultobj = solve2()
-    return render_template('mainapp.html', PojemnoscMagazynu=PojemnoscMagazynu , DostepnoscProduktowWMagazynach=DostepnoscProduktowWMagazynach , Zapotrzebowanie = Zapotrzebowanie, WagaProduktu = WagaProduktu, Koszt = Koszt,  resultlist = resultlist , resultobj = resultobj)
+    return render_template('homepage.html', PojemnoscMagazynu=PojemnoscMagazynu , DostepnoscProduktowWMagazynach=DostepnoscProduktowWMagazynach , Zapotrzebowanie = Zapotrzebowanie, WagaProduktu = WagaProduktu, Koszt = Koszt,  resultlist = resultlist , resultobj = resultobj)
 
 if __name__ == "__main__":
     app.run()
