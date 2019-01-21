@@ -1,0 +1,3 @@
+zagregowac wiersze
+
+nie wyswietlac wierszy z zerami
