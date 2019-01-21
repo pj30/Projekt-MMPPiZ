@@ -1,10 +1,13 @@
-\documentclass[a4paper]{article}
+\documentclass[11pt]{article}
 
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{graphicx}
-\usepackage{polski}
+\usepackage[T1]{fontenc}
+\usepackage[polish]{babel}
 \usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\selectlanguage{polish}
+
+
 
 \begin{document}
 \title{ \textbf{Sprawozdanie} \protect\\ Problem transportowy wielu produktów}
@@ -19,14 +22,25 @@
 
 \subsection{Problematyka}
 
-Celem niniejszego badania było rozwiązanie problemu transportowego wielu produktów. 
+Celem niniejszego ćwiczenia było rozwiązanie problemu transportowego wielu produktów. 
+
+\subsection{Cel ćwiczenia}
+
+Po wykonaniu tego ćwiczenia powinniśmy opanować importowanie danych (przy użyciu biblioteki Pandas), umieć skonfigurować i poprawnie wyświetlić dane w cześci frontend oraz umieć korzystać z biblioteki opymalizacyjnej pyscipopt. 
 
 \subsection{Przyjęty przypadek użycia}
 
 Osoba X prowadzi sieć sklepów spożywczych. Największe koszty, które ponosi firma są związane z transportem produków z magazynów do sklepów. W celu obniżenia ich udała się ona do firmy OPTTech w celu opracowania narzędzia do planowania tras i ilości zabieranych produktów.
 
+\section{Narzędzia}
+Do obliczeń oraz wizualizacji danych i wyników zostały użyte następujące narzędzia:
+\begin{itemize}
+	\item Python - mikroframework Flask - realizacja zadania frontend tj. wizualizacja danych i wyników oraz GUI użytkownika
+	\item Python - biblioteka Pyscipopt - realizacja zadania backend tj. stworzenia modelu problemu i obliczenia wyniku
+	\item Python - biblioteka Pandas - realizacja zadania backend tj. import i obróbka importowanych z pliku bazowodanego danych	
+\end{itemize}
 \section{Założenia projektowe}
-\subsection{Uproszczenia}
+\subsection{Uproszczające}
 W celu szybszej pracy kody próbka danych został ograniczona do:
 \begin{itemize}
 	\item 5 sklepów 
@@ -38,12 +52,32 @@ W celu szybszej pracy kody próbka danych został ograniczona do:
 
 Zostało także przyjęte uproszczenie iż każdy produkt jest magazowany w tej samej liczbie.
 
-\subsection{Definicja zmiennych}
-\subsection{Szukane}
-X(i,j,k) - ilość wysłanych sztuk produktu \textit{k} rodzaju do \textit{i} klienta z \textit{j} magazynu.
-\subsection{Model matematyczny}
+\subsection{Przyjęte zmienne}
+\begin{itemize}
+	\item $\displaystyle I$ - zbiór sklepów \textit{i}
+	\item $\displaystyle i$ - \textit{t}-ty sklep 
+    \item $\displaystyle J$ - zbiór magazynów \textit{j}
+	\item $\displaystyle j$ - \textit{j}-ty magazyn 
+	\item $\displaystyle K$ - zbiór produktów \textit{k}
+	\item $\displaystyle k$ - \textit{k}-ty produkt
+	\item $\displaystyle M_j$ - pojemność \textit{j}-tego magazynu 
+	\item $\displaystyle c_{i,j,k}$ - koszt dostawy do \textit{i}-tego sklepu z \textit{j}-tego magazynu \textit{k}-tego produktu 
+	\item $\displaystyle d_{i,k}$ - zapotrzebowanie \textit{i}-tego sklepu na \textit{k}-ty produkt
+\end{itemize}
 
-\newpage 
+\subsection{Szukane}
+$\displaystyle x_{i,j,k}$ - ilość wysłanych sztuk produktu \textit{k} do \textit{i} sklepu z \textit{j} magazynu
+\subsection{Model matematyczny}
+\subsubsection{Funkcja celu}
+\begin{center}
+$\displaystyle minimize \sum_{i=1}^{n}\sum_{j=1}^{m}\sum_{k=1}^{K} c_{i,j,k}*x_{i,j,k}$
+\end{center}
+\subsubsection{Ograniczenia}	
+	\begin{enumerate}
+	\item $\displaystyle \sum_{j=1}^{m} x_{i,j,k}=d_{i,k}$ dla i=1,...,n, k=1,...,K
+	\item $\displaystyle \sum_{i=1}^{n}\sum_{k=1}^{K}x_{i,j,k}\le M_j$ dla j=1,...,m
+	\item $\displaystyle x_{i,j,k}\ge 0$ dla i=1,...,n, j=1,...,m, k=1,...,K
+	\end{enumerate}
 
 \section{Założenia projektowe}
 \subsection{Dane ograniczeń}
@@ -77,48 +111,56 @@ X(i,j,k) - ilość wysłanych sztuk produktu \textit{k} rodzaju do \textit{i} kl
 	\end{tabular}
 \end{center}
 
+\subsection{Dane}
+
 \subsubsection{\textit{Zapotrzebowanie sklepów na dany produkt}}
 \begin{center}
 	\begin{tabular}{ |c|c|c | } 
 		\hline
 		Magazyn & Produkt & Zapotrzebowanie\\
 		\hline
-		Sklep 1 & 1 & \\ 
+		Sklep 1 & 1 & 80\\ 
 		\hline
-		Sklep 1 & 2 & \\ 
+		Sklep 1 & 2 & 85\\ 
 		\hline
-		Sklep 1 & 3 & \\ 
+		Sklep 1 & 3 & 300\\ 
 		\hline
-		Sklep 1 & 4 & \\ 
+		Sklep 1 & 4 & 6\\ 
 		\hline
-		Sklep 2 & 1 & \\ 
+		Sklep 2 & 1 & 270\\ 
 		\hline
-		Sklep 2 & 2 & \\ 
+		Sklep 2 & 2 & 160\\ 
 		\hline
-		Sklep 2 & 3 & \\ 
+		Sklep 2 & 3 & 400\\ 
 		\hline
-		Sklep 2 & 4 & \\ 
+		Sklep 2 & 4 & 7\\ 
 		\hline
-		Sklep 3 & 1 & \\ 
+		Sklep 3 & 1 & 250\\ 
 		\hline
-		Sklep 3 & 2 & \\ 
+		Sklep 3 & 2 & 130\\ 
 		\hline
-		Sklep 3 & 3 & \\ 
+		Sklep 3 & 3 & 350\\ 
 		\hline
-		Sklep 3 & 4 & \\ 
+		Sklep 3 & 4 & 4\\ 
 		\hline
-		Sklep 4 & 1 & \\ 
+		Sklep 4 & 1 & 160\\ 
 		\hline
-		Sklep 4 & 2 & \\ 
+		Sklep 4 & 2 & 60\\ 
 		\hline
-		Sklep 4 & 3 & \\ 
+		Sklep 4 & 3 & 200\\ 
 		\hline
-		Sklep 4 & 4 & \\ 
+		Sklep 4 & 4 & 3\\ 
+		\hline
+		Sklep 5 & 1 & 180\\ 
+		\hline
+		Sklep 5 & 2 & 40\\ 
+		\hline
+		Sklep 5 & 3 & 150\\ 
+		\hline
+		Sklep 5 & 4 & 5\\ 
 		\hline
 	\end{tabular}
 \end{center}
-
-\subsection{Dane}
 
 \subsubsection{\textit{Wagi produktów}}
 \begin{center}
@@ -137,14 +179,69 @@ X(i,j,k) - ilość wysłanych sztuk produktu \textit{k} rodzaju do \textit{i} kl
 	\end{tabular}
 \end{center}
 
+\subsubsection{\textit{Koszt dostawy do danego sklepu z magazynu}}
+\begin{center}
+	\begin{tabular}{ |c|c|c | } 
+		\hline
+		Sklep & Magazyn & Koszt\\
+		\hline
+		Sklep 1 & Magazyn 1	& 4 \\ 
+		\hline
+		Sklep 2& 	Magazyn 1& 	5\\ 
+		\hline
+		Sklep 3	& Magazyn 1	& 6\\ 
+		\hline
+		Sklep 4	& Magazyn 1& 	8\\ 
+		\hline
+		Sklep 5& 	Magazyn 1& 	10\\ 
+		\hline
+		Sklep 1& 	Magazyn 2& 	6\\ 
+		\hline
+		Sklep 2& 	Magazyn 2& 	4\\ 
+		\hline
+		Sklep 3& 	Magazyn 2& 	3\\ 
+		\hline
+		Sklep 4	& Magazyn 2& 	5\\ 
+		\hline
+		Sklep 5	& Magazyn 2	& 8\\ 
+		\hline
+		Sklep 1& 	Magazyn 3& 	9\\ 
+		\hline
+		Sklep 2& 	Magazyn 3& 	7\\ 
+		\hline
+		Sklep 3& 	Magazyn 3& 	4\\ 
+		\hline
+		Sklep 4	& Magazyn 3& 	3\\ 
+		\hline
+		Sklep 5	& Magazyn 3	& 4\\ 
+		\hline
+	\end{tabular}
+\end{center}
 \newpage
 
-
+\section{Interfejs użytkownika}
+\subsection{Widok strony głównej}
+\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{1.png}
+\subsection{Widok strony z wynikami}
+\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{2.png}
 \section{Wynik}
-
+Dla podanych danych całkowity koszt wynosi:   43536.0
+TABELA Z WYNIKAMI ZZZZ
+\section{Analiza otrzymanych wyników}
+COś TUTAJ ZZZZZZZZZZZZZZZz
+\section{Wnioski}
+WIĘCEJ ZZZZZZZZZZZZZZZz 
+Dzięki temu ćwiczeniu opanowaliśmy wiedzę z zakresu:
+\begin{itemize}
+	\item Frontend - konfiguracji oraz obsługi mikroframeworku flask w języku programowania Python
+	\item Backend - operacji na danych dzięki obsłudze biblioteki Pandas w języku programowania Python
+	\item Backend - optymalizacji dzięki bibliotece pyscipopt w języku programowania Python
+	\item tworzenia plików teskstowych z wykorzytaniem LaTeX 
+\end{itemize}
 
 \newpage 
 
 \section{Kod}
-\texttt{List.class}
+Kod jest dostępny ws repozytorium: 
+https://github.com/pj30/Projekt-MMPPiZ
 \end{document}
