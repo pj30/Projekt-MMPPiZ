@@ -1,12 +1,14 @@
 # Projekt-MMPPiZ
 
-* [SCIP](https://scip.zib.de/index.php#download)
+Python based application, for **travelling salesman problem**.
+# Creators:
 
-sklep internetowy z magazynem - planowanie zapełnienia magazynu - algorytm odejmuje losowo ilości danych produktów a my składamy zamówienia na dane produkty
+- [Przemysław Jekiel ](https://github.com/pj30)
+- [Bartosz Wlazło ](https://github.com/BartoszWlazlo)
 
-ALBO
-
-komiwojażer
-
-magazyny-trasy-zamówienia - optymalizacja min kosztu wysyłki
-+ zamawianie w magazynach
+## Based on:
+- Python 2.7
+- Flask
+- Html
+- Css
+- JavaScript
